@@ -33,9 +33,9 @@ public:
 	Tile* m_sweeperSpawn;
 
 	std::ofstream myMap;
-
-	
 	std::vector<int> map;
+
+	bool goalReached = false;
 
 	int map1[12][16] = {
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
