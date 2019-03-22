@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Grid.h"
 
 enum Dir {
 	UP,
@@ -13,7 +14,7 @@ enum Dir {
 class Player
 {
 public:
-	Player();
+	Player(Grid &m_Grid);
 	~Player();
 	void update();
 	void move();
@@ -29,4 +30,7 @@ private:
 	sf::Texture m_Txt;
 	sf::Sprite m_sprite;
 	Dir m_currentDir = IDLE;
+	int pGridX, pGridY;
+
+	Grid *m_Grid;
 };
