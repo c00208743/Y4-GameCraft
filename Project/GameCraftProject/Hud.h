@@ -16,6 +16,7 @@ public:
 	
 	void setScore(const int score);
 	void addScore(const int increment);
+	void calcTextPositions();
 private:
 	sf::Font m_font;
 

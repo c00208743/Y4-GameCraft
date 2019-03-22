@@ -7,7 +7,6 @@ Game::Game() :
 	m_window{ sf::VideoMode{ 800, 600, 32 }, "GameCraft" },
 	m_exitGame{ false } // When true game will exit
 {
-
 }
 
 /// <summary>

@@ -65,10 +65,14 @@ void Hud::render(sf::RenderWindow & window)
 
 void Hud::setHudSize(int w, int h)
 {
+	m_hudBackground.setSize(sf::Vector2f(w, h));
+	calcTextPositions();
 }
 
 void Hud::setPosition(sf::Vector2f position)
 {
+	m_hudBackground.setPosition(position);
+	calcTextPositions();
 }
 
 void Hud::setScore(const int score)
@@ -79,4 +83,16 @@ void Hud::setScore(const int score)
 void Hud::addScore(const int increment)
 {
 	m_score += increment;
+}
+
+void Hud::calcTextPositions()
+{
+	// Calc text positions
+	sf::Vector2f backgroundPos = m_hudBackground.getPosition();
+	sf::Vector2f backgroundSize = m_hudBackground.getSize();
+
+	float textY = backgroundPos.y + (backgroundSize.y - (backgroundSize.y / 1.25));
+	m_scoreText.setPosition(sf::Vector2f(backgroundPos.x + 10, textY));
+	int w = m_timeText.getLocalBounds().width;
+	m_timeText.setPosition(sf::Vector2f(backgroundPos.x + backgroundSize.x - (m_timeText.getGlobalBounds().width * 2), textY));
 }
