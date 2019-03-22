@@ -14,31 +14,44 @@ Grid::Grid()
 	//loadLevel(map1);
 	m_currentLevel = 0;
 	loadNextLevel();
+
+	//loadNextLevel();
  
 
 }
 void Grid::loadNextLevel() {
 
+	
 	switch (m_currentLevel)
 	{
 	case 0:
 		loadLevel(map1);
-		m_currentLevel = 0;
+		m_currentLevel = 1;
+		goalReached = false;
 		break;
 	case 1:
 		loadLevel(map2);
 		m_currentLevel = 2;
+		goalReached = false;
 		break;
 	case 2:
 		loadLevel(map3);
 		m_currentLevel = 3;
+		goalReached = false;
 		break;
 	case 3:
 		loadLevel(map4);
 		m_currentLevel = 4;
+		goalReached = false;
+		break;
 	case 4:
 		loadLevel(map5);
-		m_currentLevel = 4;
+		m_currentLevel = 5;
+		goalReached = false;
+	case 5:
+		loadLevel(map1);
+		m_currentLevel = 1;
+		goalReached = false;
 		break;
 	default:
 		break;
@@ -48,11 +61,23 @@ void Grid::loadNextLevel() {
 }
 void Grid::loadLevel(int level[12][16]) {
 
+	if (!m_scoreTexture.loadFromFile("Assets/Images/Pickups/coin 2.png")) {
+		std::cerr << "Error: Failed to load score pickup png" << std::endl;
+	}
+	if (!m_buffer.loadFromFile("Assets/Sounds/Picked Coin Echo.wav")) {
+		std::cerr << "Error: Failed to load Picked Coin Echo.wav" << std::endl;
+	}
+		
+		
+
+	x = 0;
+	y = 0;
 
 	for (int i = 0; i < 12; i++)
 	{
 		for (int j = 0; j < 16; j++)
 		{
+
 			m_tileGrid[i][j] = new Tile(x, y+50, m_tileSize, m_tileScale, i, j, m_font);
 			x = x + m_tileSize * m_tileScale;
 
@@ -79,6 +104,18 @@ void Grid::loadLevel(int level[12][16]) {
 		y = y + m_tileSize * m_tileScale;
 	}
 
+	initScorePickups();
+
+
+
+}
+
+
+void Grid::update(float dt)
+{
+	for (auto & pickup : m_scorePickups) {
+		m_scorePickups[pickup.first].update(dt);
+	}
 }
 
 /// <summary>
@@ -95,6 +132,34 @@ void Grid::render(sf::RenderWindow &window)
 			m_tileGrid[i][j]->render(window);
 
 		}
+
 	}
 
+	for (auto & scorePickup : m_scorePickups) {
+		m_scorePickups[scorePickup.first].render(window);
+	}
+
+}
+
+void Grid::initScorePickups()
+{
+	m_scorePickups.clear();
+	for (auto & row : m_tileGrid) {
+		for (auto & col : row) {
+			if (col->m_currentState == NONE) {
+				ScorePickup s;
+				s.init(col->m_position, m_scoreTexture, m_buffer);
+				s.setSize(50, 50);
+				
+				m_scorePickups[std::make_pair(col->m_xPos, col->m_yPos)] = s;
+			}
+		}
+	}
+}
+
+void Grid::lerpAllPickups()
+{
+	for (auto & scorePickup : m_scorePickups) {
+		m_scorePickups[scorePickup.first].collison();
+	}
 }

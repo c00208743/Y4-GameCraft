@@ -1,12 +1,12 @@
 #pragma once
-
-#pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include "Tile.h"
+
+#include "ScorePickup.h"
 
 using namespace std;
 
@@ -16,7 +16,7 @@ public:
 	Grid();
 	int m_currentLevel;
 	void run();
-	void update(sf::View &m_gameView);
+	void update(float dt);
 	void loadNextLevel();
 	void loadLevel(int level[12][16]);
 	void render(sf::RenderWindow &window);
@@ -33,9 +33,10 @@ public:
 	Tile* m_sweeperSpawn;
 
 	std::ofstream myMap;
-
-	
 	std::vector<int> map;
+	void lerpAllPickups();
+
+	bool goalReached = false;
 
 	int map1[12][16] = {
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
@@ -101,6 +102,7 @@ public:
 		{ 1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 		{ 1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1 },
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 } };
+	std::map<std::pair<int, int>, ScorePickup> m_scorePickups;
 
 private:
 
@@ -129,4 +131,8 @@ protected:
 	bool m_rightPress = false;
 	sf::View m_gameView;
 	sf::View miniMapView;
+
+	void initScorePickups();
+	sf::Texture m_scoreTexture;
+	sf::SoundBuffer m_buffer;
 };
