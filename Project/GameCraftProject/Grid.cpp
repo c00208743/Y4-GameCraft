@@ -97,7 +97,7 @@ void Grid::loadLevel(int level[12][16]) {
 void Grid::update(float dt)
 {
 	for (auto & pickup : m_scorePickups) {
-		pickup.update(dt);
+		m_scorePickups[pickup.first].update(dt);
 	}
 }
 
@@ -119,7 +119,7 @@ void Grid::render(sf::RenderWindow &window)
 	}
 
 	for (auto & scorePickup : m_scorePickups) {
-		scorePickup.render(window);
+		m_scorePickups[scorePickup.first].render(window);
 	}
 
 }
@@ -133,7 +133,8 @@ void Grid::initScorePickups()
 				ScorePickup s;
 				s.init(col->m_position, m_scoreTexture, m_buffer);
 				s.setSize(50, 50);
-				m_scorePickups.push_back(s);
+				
+				m_scorePickups[std::make_pair(col->m_xPos, col->m_yPos)] = s;
 			}
 		}
 	}
@@ -142,6 +143,6 @@ void Grid::initScorePickups()
 void Grid::lerpAllPickups()
 {
 	for (auto & scorePickup : m_scorePickups) {
-		scorePickup.collison();
+		m_scorePickups[scorePickup.first].collison();
 	}
 }

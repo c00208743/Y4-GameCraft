@@ -78,6 +78,8 @@ void Game::update(sf::Time t_deltaTime)
 	m_player->update();
 	m_Ai->update();
 	m_Grid->update(dt);
+	m_hud.update(dt);
+	m_hud.setScore(m_player->m_score);
 }
 
 /// <summary>

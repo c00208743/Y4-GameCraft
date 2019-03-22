@@ -12,6 +12,7 @@ public:
 	void update(float dt);
 	void render(sf::RenderWindow & window);
 	void setActive(bool active);
+	bool getActive();
 	void init(sf::Vector2f pos, sf::Texture & texture, sf::SoundBuffer & buffer);
 	void setSize(int w, int h);
 	void collison();
@@ -19,10 +20,11 @@ public:
 	{
 		return (1.0f - interpolate) * start + (interpolate * end);
 	}
+	bool m_hit;
 private:
 	sf::Sprite m_sprite;
 	bool m_active;
-	bool m_hit;
+	
 	float m_maxLerpTime;
 	float m_currentTime;
 	float m_currentPercent;

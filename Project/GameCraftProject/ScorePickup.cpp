@@ -40,6 +40,11 @@ void ScorePickup::setActive(bool active)
 {
 }
 
+bool ScorePickup::getActive()
+{
+	return m_active;
+}
+
 void ScorePickup::init(sf::Vector2f pos, sf::Texture & texture, sf::SoundBuffer & buffer)
 {
 	m_sprite.setTexture(texture);

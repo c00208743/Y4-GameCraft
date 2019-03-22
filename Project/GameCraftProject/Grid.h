@@ -102,6 +102,7 @@ public:
 		{ 1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 		{ 1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1 },
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 } };
+	std::map<std::pair<int, int>, ScorePickup> m_scorePickups;
 
 private:
 
@@ -130,7 +131,7 @@ protected:
 	bool m_rightPress = false;
 	sf::View m_gameView;
 	sf::View miniMapView;
-	std::vector<ScorePickup> m_scorePickups;
+
 	void initScorePickups();
 	sf::Texture m_scoreTexture;
 	sf::SoundBuffer m_buffer;

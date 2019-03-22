@@ -78,6 +78,7 @@ void Hud::setPosition(sf::Vector2f position)
 void Hud::setScore(const int score)
 {
 	m_score = score;
+	m_scoreText.setString(m_scoreString + std::to_string(m_score));
 }
 
 void Hud::addScore(const int increment)
