@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	m_pos = sf::Vector2f(400, 300);
+	m_pos = sf::Vector2f(50, 100);
 	velocity = sf::Vector2f(0, 0);
 
 	if (!m_Txt.loadFromFile("./assets/playerImg.png"))
