@@ -7,7 +7,8 @@ enum State
 {
 	NONE,
 	GOAL,
-	WALL
+	WALL, 
+	TRAP
 };
 
 

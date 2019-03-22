@@ -3,7 +3,9 @@
 Player::Player(Grid &Grid):
 	m_Grid(&Grid)
 {
+
 	m_pos = sf::Vector2f(75, 125);
+
 	velocity = sf::Vector2f(0, 0);
 
 	if (!m_Txt.loadFromFile("./assets/playerImg.png"))
