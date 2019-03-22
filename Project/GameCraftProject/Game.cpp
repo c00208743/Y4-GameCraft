@@ -5,14 +5,12 @@
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode{ 800, 600, 32 }, "GameCraft" },
+	m_currentGameState(GameState::License),
 	m_exitGame{ false } // When true game will exit
 {
-
-	m_player = new Player();
-	m_Ai = new Ai();
-
-	m_Grid = new Grid();
-	m_player = new Player(*m_Grid);
+	m_License = new LicenseScreen(*this);
+	m_Splash = new SplashScreen(*this);
+	m_game = new GameScreen();
 }
 
 /// <summary>
@@ -64,6 +62,11 @@ void Game::processEvents()
 	}
 }
 
+void Game::setGameState(GameState gameState)
+{
+	m_currentGameState = gameState;
+}
+
 /// <summary>
 /// Update loop for the game
 /// </summary>
@@ -74,8 +77,21 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-	m_player->update();
-	m_Ai->update();
+	switch (m_currentGameState)
+	{
+	case GameState::License:
+		m_License->update(t_deltaTime);
+		break;
+	case GameState::Splash:
+		m_Splash->update(t_deltaTime);
+		break;
+	case GameState::GameScreen:
+		m_game->update(t_deltaTime);
+		break;
+	default:
+		break;
+
+	}
 }
 
 /// <summary>
@@ -84,9 +100,21 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
-	m_Grid->render(m_window);
-	m_player->render(m_window);
-	m_Ai->render(m_window);
-	m_hud.render(m_window);
+	switch (m_currentGameState)
+	{
+	case GameState::License:
+		m_License->render(m_window);
+		break;
+	case GameState::Splash:
+		m_Splash->render(m_window);
+		break;
+	case GameState::GameScreen:
+		m_game->render(m_window);
+		break;
+	default:
+		break;
+
+	}
 	m_window.display();
 }
+	

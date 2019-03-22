@@ -127,19 +127,25 @@
   <ItemGroup>
     <ClCompile Include="Ai.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="LicenseScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ai.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="LicenseScreen.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Hud.h" />
+    <ClInclude Include="SplashScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
