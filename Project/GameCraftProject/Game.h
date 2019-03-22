@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Grid.h"
 
 class Game
 {
@@ -23,7 +24,10 @@ private:
 	sf::View m_miniMapView;
 	bool m_exitGame; // control exiting game
 
+
 	Player *m_player;
+	Grid *m_Grid;
+
 };
 
 #endif // !GAME_H
