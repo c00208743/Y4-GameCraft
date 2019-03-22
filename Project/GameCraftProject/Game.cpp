@@ -8,7 +8,6 @@ Game::Game() :
 	m_exitGame{ false } // When true game will exit
 {
 
-	m_player = new Player();
 	m_Ai = new Ai();
 
 	m_Grid = new Grid();
