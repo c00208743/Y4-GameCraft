@@ -48,6 +48,7 @@ void Grid::loadNextLevel() {
 }
 void Grid::loadLevel(int level[12][16]) {
 
+
 	for (int i = 0; i < 12; i++)
 	{
 		for (int j = 0; j < 16; j++)
@@ -67,12 +68,17 @@ void Grid::loadLevel(int level[12][16]) {
 			{
 				m_tileGrid[i][j]->setCurrentState(GOAL);
 			}
+			else if (mySampleMap[i][j] == 3)
+			{
+				m_tileGrid[i][j]->setCurrentState(TRAP);
+			}
 
 		}
 
 		x = 0;
 		y = y + m_tileSize * m_tileScale;
 	}
+
 }
 
 /// <summary>
@@ -89,7 +95,6 @@ void Grid::render(sf::RenderWindow &window)
 			m_tileGrid[i][j]->render(window);
 
 		}
-
 	}
 
 }
