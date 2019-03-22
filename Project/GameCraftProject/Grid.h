@@ -15,7 +15,7 @@ class Grid
 public:
 	Grid();
 	void run();
-	void update(sf::View &m_gameView);
+	void update(float dt);
 	void render(sf::RenderWindow &window);
 	bool inView(sf::Vector2f position, sf::View &m_gameView);
 
@@ -30,7 +30,7 @@ public:
 	Tile* m_sweeperSpawn;
 
 	std::ofstream myMap;
-
+	void lerpAllPickups();
 private:
 
 	void processEvents();
@@ -61,4 +61,5 @@ protected:
 	std::vector<ScorePickup> m_scorePickups;
 	void initScorePickups();
 	sf::Texture m_scoreTexture;
+	sf::SoundBuffer m_buffer;
 };

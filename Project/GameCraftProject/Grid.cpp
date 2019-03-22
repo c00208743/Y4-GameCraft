@@ -13,6 +13,9 @@ Grid::Grid()
 	if (!m_scoreTexture.loadFromFile("Assets/Images/Pickups/coin 2.png")) {
 		std::cerr << "Error: Failed to load score pickup png" << std::endl;
 	}
+	if (!m_buffer.loadFromFile("Assets/Sounds/Picked Coin Echo.wav")) {
+		std::cerr << "Error: Failed to load Picked Coin Echo.wav" << std::endl;
+	}
 	int mySampleMap[12][16] = {
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{ 1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
@@ -72,6 +75,13 @@ Grid::Grid()
 }
 
 
+void Grid::update(float dt)
+{
+	for (auto & pickup : m_scorePickups) {
+		pickup.update(dt);
+	}
+}
+
 /// <summary>
 /// Renders all the tiles in the map only if they are in the game view
 /// This will improve performance
@@ -102,10 +112,17 @@ void Grid::initScorePickups()
 		for (auto & col : row) {
 			if (col->m_currentState == NONE) {
 				ScorePickup s;
-				s.init(col->m_position, m_scoreTexture);
+				s.init(col->m_position, m_scoreTexture, m_buffer);
 				s.setSize(50, 50);
 				m_scorePickups.push_back(s);
 			}
 		}
+	}
+}
+
+void Grid::lerpAllPickups()
+{
+	for (auto & scorePickup : m_scorePickups) {
+		scorePickup.collison();
 	}
 }

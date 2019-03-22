@@ -2,6 +2,7 @@
 #define SCOREPICKUP_H
 
 #include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
 
 class ScorePickup {
 public:
@@ -11,11 +12,24 @@ public:
 	void update(float dt);
 	void render(sf::RenderWindow & window);
 	void setActive(bool active);
-	void init(sf::Vector2f pos, sf::Texture & texture);
+	void init(sf::Vector2f pos, sf::Texture & texture, sf::SoundBuffer & buffer);
 	void setSize(int w, int h);
+	void collison();
+	float lerpFloat(float start, float end, float interpolate)
+	{
+		return (1.0f - interpolate) * start + (interpolate * end);
+	}
 private:
 	sf::Sprite m_sprite;
 	bool m_active;
+	bool m_hit;
+	float m_maxLerpTime;
+	float m_currentTime;
+	float m_currentPercent;
+	float m_percentStep;
+	sf::Vector2f m_startPosition;
+	sf::Vector2f m_goalPosition;
+	sf::Sound m_sound;
 };
 
 #endif // !SCOREPICKUP_H
