@@ -46,6 +46,9 @@ void Tile::setCurrentState(State s)
 		rectangle.setFillColor(sf::Color(45, 45, 45));
 		//rectangle.setOutlineThickness(0);
 		break;
+	case TRAP:
+		rectangle.setFillColor(sf::Color(0,255, 0, 255));
+		break;
 	default:
 		break;
 	}

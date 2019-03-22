@@ -33,7 +33,11 @@
     <ClCompile Include="Hud.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="ScorePickup.cpp">
+=======
+    <ClCompile Include="Ai.cpp">
+>>>>>>> eba7a85d4b34667cd2aef3be206c2698f45eb289
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +57,11 @@
     <ClInclude Include="Hud.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="ScorePickup.h">
+=======
+    <ClInclude Include="Ai.h">
+>>>>>>> eba7a85d4b34667cd2aef3be206c2698f45eb289
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

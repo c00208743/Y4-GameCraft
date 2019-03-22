@@ -1,26 +1,25 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Grid.h"
 
-enum Dir {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	IDLE
+enum Direction {
+	d_UP,
+	d_DOWN,
+	d_LEFT,
+	d_RIGHT,
+	d_IDLE
 };
 
-class Player
+class Ai
 {
 public:
-	Player(Grid &m_Grid);
-	~Player();
+	Ai();
+	~Ai();
 	void update();
 	void move();
 	void collision();
 	void setDirection();
-	Dir getDirection();
+	Direction getDirection();
 	void render(sf::RenderWindow &window);
 	sf::Vector2f getPos();
 
@@ -29,8 +28,8 @@ private:
 	sf::Vector2f velocity;
 	sf::Texture m_Txt;
 	sf::Sprite m_sprite;
-	Dir m_currentDir = IDLE;
-	int pGridX, pGridY;
 
-	Grid *m_Grid;
+	Direction m_currentDir = d_IDLE;
+	int timer = 0;
+	int r = 0;
 };
