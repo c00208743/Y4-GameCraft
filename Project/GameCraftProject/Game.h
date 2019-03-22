@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include "Grid.h"
 
 class Game
 {
@@ -21,6 +22,8 @@ private:
 	sf::View m_mainView;
 	sf::View m_miniMapView;
 	bool m_exitGame; // control exiting game
+
+	Grid *m_Grid;
 };
 
 #endif // !GAME_H
