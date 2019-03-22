@@ -128,6 +128,15 @@ void Player::collision()
 		}
 		m_currentDir = IDLE;
 	}
+	if (m_Grid->m_tileGrid[pGridY][pGridX]->getCurrentState() == GOAL && m_Grid->goalReached == false)
+	{
+		
+		m_Grid->goalReached = true;
+		m_Grid->loadNextLevel();
+		m_pos = sf::Vector2f(75, 125);
+		m_sprite.setPosition(m_pos);
+		
+	}
 	if (m_Grid->m_tileGrid[pGridY][pGridX]->getCurrentState() == NONE) {
 		std::pair<int, int> pPos(pGridY, pGridX);
 		if (m_Grid->m_scorePickups[pPos].getActive() && !m_Grid->m_scorePickups[pPos].m_hit) {

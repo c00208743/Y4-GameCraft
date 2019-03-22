@@ -14,31 +14,44 @@ Grid::Grid()
 	//loadLevel(map1);
 	m_currentLevel = 0;
 	loadNextLevel();
+
+	//loadNextLevel();
  
 
 }
 void Grid::loadNextLevel() {
 
+	
 	switch (m_currentLevel)
 	{
 	case 0:
 		loadLevel(map1);
-		m_currentLevel = 0;
+		m_currentLevel = 1;
+		goalReached = false;
 		break;
 	case 1:
 		loadLevel(map2);
 		m_currentLevel = 2;
+		goalReached = false;
 		break;
 	case 2:
 		loadLevel(map3);
 		m_currentLevel = 3;
+		goalReached = false;
 		break;
 	case 3:
 		loadLevel(map4);
 		m_currentLevel = 4;
+		goalReached = false;
+		break;
 	case 4:
 		loadLevel(map5);
-		m_currentLevel = 4;
+		m_currentLevel = 5;
+		goalReached = false;
+	case 5:
+		loadLevel(map1);
+		m_currentLevel = 1;
+		goalReached = false;
 		break;
 	default:
 		break;
@@ -57,10 +70,14 @@ void Grid::loadLevel(int level[12][16]) {
 		
 		
 
+	x = 0;
+	y = 0;
+
 	for (int i = 0; i < 12; i++)
 	{
 		for (int j = 0; j < 16; j++)
 		{
+
 			m_tileGrid[i][j] = new Tile(x, y+50, m_tileSize, m_tileScale, i, j, m_font);
 			x = x + m_tileSize * m_tileScale;
 
