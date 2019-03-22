@@ -68,7 +68,7 @@ void Grid::loadLevel(int level[12][16]) {
 			{
 				m_tileGrid[i][j]->setCurrentState(GOAL);
 			}
-			else if (mySampleMap[i][j] == 3)
+			else if (level[i][j] == 3)
 			{
 				m_tileGrid[i][j]->setCurrentState(TRAP);
 			}

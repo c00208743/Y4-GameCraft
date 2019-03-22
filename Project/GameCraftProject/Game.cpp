@@ -7,12 +7,11 @@ Game::Game() :
 	m_window{ sf::VideoMode{ 800, 600, 32 }, "GameCraft" },
 	m_exitGame{ false } // When true game will exit
 {
-
-	m_player = new Player();
-	m_Ai = new Ai();
+	
 
 	m_Grid = new Grid();
 	m_player = new Player(*m_Grid);
+	m_Ai = new Ai(*m_Grid);
 }
 
 /// <summary>
