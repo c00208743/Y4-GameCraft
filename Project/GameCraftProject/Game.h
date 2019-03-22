@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Ai.h"
 #include "Grid.h"
 
 // Class Files
@@ -29,6 +30,7 @@ private:
 
 
 	Player *m_player;
+	Ai * m_Ai;
 	Grid *m_Grid;
 
 

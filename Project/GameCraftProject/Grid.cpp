@@ -13,7 +13,7 @@ Grid::Grid()
 	int mySampleMap[12][16] = {
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{ 1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
-		{ 1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
+		{ 1,0,0,0,0,0,3,0,0,0,0,1,1,1,1,1},
 		{ 1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
 		{ 1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
 		{ 1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1},
@@ -44,6 +44,10 @@ Grid::Grid()
 			{
 				m_tileGrid[i][j]->setCurrentState(GOAL);
 			}
+			else if (mySampleMap[i][j] == 3)
+			{
+				m_tileGrid[i][j]->setCurrentState(TRAP);
+			}
 
 		}
 
@@ -63,7 +67,6 @@ Grid::Grid()
 
 	//initGrid();
 
-
 }
 
 
@@ -81,7 +84,6 @@ void Grid::render(sf::RenderWindow &window)
 			m_tileGrid[i][j]->render(window);
 
 		}
-
 	}
 
 }

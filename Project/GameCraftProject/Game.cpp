@@ -8,6 +8,7 @@ Game::Game() :
 	m_exitGame{ false } // When true game will exit
 {
 	m_player = new Player();
+	m_Ai = new Ai();
 	m_Grid = new Grid();
 }
 
@@ -71,6 +72,7 @@ void Game::update(sf::Time t_deltaTime)
 		m_window.close();
 	}
 	m_player->update();
+	m_Ai->update();
 }
 
 /// <summary>
@@ -81,6 +83,7 @@ void Game::render()
 	m_window.clear(sf::Color::Black);
 	m_Grid->render(m_window);
 	m_player->render(m_window);
+	m_Ai->render(m_window);
 	m_hud.render(m_window);
 	m_window.display();
 }
