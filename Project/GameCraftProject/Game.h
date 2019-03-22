@@ -33,6 +33,8 @@ private:
 	Ai * m_Ai;
 	Grid *m_Grid;
 
+	//Score
+	sf::Texture m_scoreTexture;
 
 	// Hud
 	Hud m_hud;

@@ -137,6 +137,13 @@ void Player::collision()
 		m_sprite.setPosition(m_pos);
 		
 	}
+	if (m_Grid->m_tileGrid[pGridY][pGridX]->getCurrentState() == NONE) {
+		std::pair<int, int> pPos(pGridY, pGridX);
+		if (m_Grid->m_scorePickups[pPos].getActive() && !m_Grid->m_scorePickups[pPos].m_hit) {
+			m_Grid->m_scorePickups[pPos].collison();
+			m_score++;
+		}
+	}
 }
 
 sf::Vector2f Player::getPos()
