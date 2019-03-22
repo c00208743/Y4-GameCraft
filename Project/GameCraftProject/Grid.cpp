@@ -53,7 +53,7 @@ void Grid::loadLevel(int level[12][16]) {
 	{
 		for (int j = 0; j < 16; j++)
 		{
-			m_tileGrid[i][j] = new Tile(x, y + 50, m_tileSize, m_tileScale, i, j, m_font);
+			m_tileGrid[i][j] = new Tile(x, y+50, m_tileSize, m_tileScale, i, j, m_font);
 			x = x + m_tileSize * m_tileScale;
 
 			if (level[i][j] == 1)
