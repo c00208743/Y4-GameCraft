@@ -10,20 +10,44 @@
 /// </summary>
 Grid::Grid()
 {
-	int mySampleMap[12][16] = {
-		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{ 1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
-		{ 1,0,0,0,0,0,3,0,0,0,0,1,1,1,1,1},
-		{ 1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
-		{ 1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
-		{ 1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1},
-		{ 1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1},
-		{ 1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1},
-		{ 1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1},
-		{ 1,1,1,1,1,1,1,1,1,0,2,1,1,1,1,1},
-		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-		
-		
+	//loadNextLevel(0);
+	//loadLevel(map1);
+	m_currentLevel = 0;
+	loadNextLevel();
+ 
+
+}
+void Grid::loadNextLevel() {
+
+	switch (m_currentLevel)
+	{
+	case 0:
+		loadLevel(map1);
+		m_currentLevel = 0;
+		break;
+	case 1:
+		loadLevel(map2);
+		m_currentLevel = 2;
+		break;
+	case 2:
+		loadLevel(map3);
+		m_currentLevel = 3;
+		break;
+	case 3:
+		loadLevel(map4);
+		m_currentLevel = 4;
+	case 4:
+		loadLevel(map5);
+		m_currentLevel = 4;
+		break;
+	default:
+		break;
+	}
+
+	
+}
+void Grid::loadLevel(int level[12][16]) {
+
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -32,15 +56,15 @@ Grid::Grid()
 			m_tileGrid[i][j] = new Tile(x, y + 50, m_tileSize, m_tileScale, i, j, m_font);
 			x = x + m_tileSize * m_tileScale;
 
-			if (mySampleMap[i][j] == 1)
+			if (level[i][j] == 1)
 			{
 				m_tileGrid[i][j]->setCurrentState(WALL);
 			}
-			else if (mySampleMap[i][j] == 0)
+			else if (level[i][j] == 0)
 			{
 				m_tileGrid[i][j]->setCurrentState(NONE);
 			}
-			else if (mySampleMap[i][j] == 2)
+			else if (level[i][j] == 2)
 			{
 				m_tileGrid[i][j]->setCurrentState(GOAL);
 			}
@@ -55,20 +79,7 @@ Grid::Grid()
 		y = y + m_tileSize * m_tileScale;
 	}
 
-	//for (int i = 0; i < m_gridSize; i++)
-	//{
-
-		//m_tileGrid[0][i]->setCurrentState(OBSTACLE);
-		//m_tileGrid[i][0]->setCurrentState(OBSTACLE);
-		//m_tileGrid[m_gridSize - 1][i]->setCurrentState(OBSTACLE);
-		//m_tileGrid[i][m_gridSize - 1]->setCurrentState(OBSTACLE);
-	//}
-
-
-	//initGrid();
-
 }
-
 
 /// <summary>
 /// Renders all the tiles in the map only if they are in the game view
