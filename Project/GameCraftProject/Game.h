@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include "Player.h"
+#include "Grid.h"
 
 // Class Files
 #include "Hud.h"
@@ -24,6 +26,11 @@ private:
 	sf::View m_mainView;
 	sf::View m_miniMapView;
 	bool m_exitGame; // control exiting game
+
+
+	Player *m_player;
+	Grid *m_Grid;
+
 
 	// Hud
 	Hud m_hud;
