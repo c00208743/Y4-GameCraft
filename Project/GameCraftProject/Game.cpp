@@ -79,7 +79,8 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
-  m_Grid->render(m_window);
+	m_Grid->render(m_window);
 	m_player->render(m_window);
+	m_hud.render(m_window);
 	m_window.display();
 }
