@@ -31,6 +31,8 @@ private:
 	Player *m_player;
 	Grid *m_Grid;
 
+	//Score
+	sf::Texture m_scoreTexture;
 
 	// Hud
 	Hud m_hud;

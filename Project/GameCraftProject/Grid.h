@@ -1,12 +1,12 @@
 #pragma once
-
-#pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include "Tile.h"
+
+#include "ScorePickup.h"
 
 using namespace std;
 
@@ -58,4 +58,7 @@ protected:
 	bool m_rightPress = false;
 	sf::View m_gameView;
 	sf::View miniMapView;
+	std::vector<ScorePickup> m_scorePickups;
+	void initScorePickups();
+	sf::Texture m_scoreTexture;
 };

@@ -10,6 +10,9 @@
 /// </summary>
 Grid::Grid()
 {
+	if (!m_scoreTexture.loadFromFile("Assets/Images/Pickups/coin 2.png")) {
+		std::cerr << "Error: Failed to load score pickup png" << std::endl;
+	}
 	int mySampleMap[12][16] = {
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{ 1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1},
@@ -51,6 +54,8 @@ Grid::Grid()
 		y = y + m_tileSize * m_tileScale;
 	}
 
+	initScorePickups();
+
 	//for (int i = 0; i < m_gridSize; i++)
 	//{
 
@@ -84,4 +89,23 @@ void Grid::render(sf::RenderWindow &window)
 
 	}
 
+	for (auto & scorePickup : m_scorePickups) {
+		scorePickup.render(window);
+	}
+
+}
+
+void Grid::initScorePickups()
+{
+	m_scorePickups.clear();
+	for (auto & row : m_tileGrid) {
+		for (auto & col : row) {
+			if (col->m_currentState == NONE) {
+				ScorePickup s;
+				s.init(col->m_position, m_scoreTexture);
+				s.setSize(50, 50);
+				m_scorePickups.push_back(s);
+			}
+		}
+	}
 }
