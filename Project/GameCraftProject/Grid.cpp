@@ -48,6 +48,10 @@ void Grid::loadNextLevel() {
 		loadLevel(map5);
 		m_currentLevel = 5;
 		goalReached = false;
+	case 5:
+		loadLevel(map1);
+		m_currentLevel = 1;
+		goalReached = false;
 		break;
 	default:
 		break;
