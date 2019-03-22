@@ -3,6 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
+// Class Files
+#include "Hud.h"
+
 class Game
 {
 public:
@@ -21,6 +24,9 @@ private:
 	sf::View m_mainView;
 	sf::View m_miniMapView;
 	bool m_exitGame; // control exiting game
+
+	// Hud
+	Hud m_hud;
 };
 
 #endif // !GAME_H
