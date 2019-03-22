@@ -4,10 +4,10 @@
 /// Constructor for the game object
 /// </summary>
 Game::Game() :
-	m_window{ sf::VideoMode{ 1280, 720, 32 }, "GameCraft" },
+	m_window{ sf::VideoMode{ 800, 600, 32 }, "GameCraft" },
 	m_exitGame{ false } // When true game will exit
 {
-
+	m_player = new Player();
 }
 
 /// <summary>
@@ -69,6 +69,7 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	m_player->update();
 }
 
 /// <summary>
@@ -77,4 +78,6 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
+	m_player->render(m_window);
+	m_window.display();
 }
