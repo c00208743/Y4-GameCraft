@@ -5,6 +5,9 @@
 #include "Player.h"
 #include "Grid.h"
 
+// Class Files
+#include "Hud.h"
+
 class Game
 {
 public:
@@ -28,6 +31,9 @@ private:
 	Player *m_player;
 	Grid *m_Grid;
 
+
+	// Hud
+	Hud m_hud;
 };
 
 #endif // !GAME_H
