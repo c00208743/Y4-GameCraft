@@ -1,4 +1,5 @@
 #include "ScorePickup.h"
+#include <iostream>
 
 ScorePickup::ScorePickup()
 {
@@ -20,6 +21,7 @@ void ScorePickup::update(float dt)
 			m_currentPercent += m_percentStep;
 		else {
 			m_currentPercent = 1;
+			std::cout << "Done" << std::endl;
 			m_active = false;
 		}
 		sf::Vector2f pos(
@@ -65,4 +67,10 @@ void ScorePickup::collison()
 	m_hit = true;
 	m_goalPosition = sf::Vector2f(0, 0);
 	m_sound.play();
+}
+
+sf::Vector2f ScorePickup::getPosition()
+{
+	// TODO: insert return statement here
+	return m_sprite.getPosition();
 }

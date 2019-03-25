@@ -20,11 +20,6 @@ public:
 	void loadNextLevel();
 	void loadLevel(int level[12][16]);
 	void render(sf::RenderWindow &window);
-	bool inView(sf::Vector2f position, sf::View &m_gameView);
-
-	void processGameEvents(sf::Event& event);
-	void initGrid(int posX, int posY);
-	void updateCost(int posX, int posY, int radius);
 	static const int m_gridSize = 12;
 	static const int m_tileSize = 50;
 	Tile *m_tileGrid[m_gridSize][16];
@@ -105,10 +100,6 @@ public:
 	std::map<std::pair<int, int>, ScorePickup> m_scorePickups;
 
 private:
-
-	void processEvents();
-	void reset();
-	void getPath(Tile m_startTile);
 
 protected:
 

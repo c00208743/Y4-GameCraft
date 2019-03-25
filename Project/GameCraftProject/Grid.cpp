@@ -5,6 +5,7 @@
 #include <queue>
 #include "Grid.h"
 
+
 /// <summary>
 /// 
 /// </summary>
@@ -67,9 +68,6 @@ void Grid::loadLevel(int level[12][16]) {
 	if (!m_buffer.loadFromFile("Assets/Sounds/Picked Coin Echo.wav")) {
 		std::cerr << "Error: Failed to load Picked Coin Echo.wav" << std::endl;
 	}
-		
-		
-
 	x = 0;
 	y = 0;
 
@@ -103,19 +101,15 @@ void Grid::loadLevel(int level[12][16]) {
 		x = 0;
 		y = y + m_tileSize * m_tileScale;
 	}
-
 	initScorePickups();
-
-
-
 }
 
 
 void Grid::update(float dt)
 {
-	for (auto & pickup : m_scorePickups) {
-		m_scorePickups[pickup.first].update(dt);
-	}
+	//for (auto & pickup : m_scorePickups) {
+	//	m_scorePickups[pickup.first].update(dt);
+	//}
 }
 
 /// <summary>
@@ -128,15 +122,15 @@ void Grid::render(sf::RenderWindow &window)
 	{
 		for (int j = 0; j < 16; j++)
 		{
-
 			m_tileGrid[i][j]->render(window);
-
 		}
-
 	}
 
 	for (auto & scorePickup : m_scorePickups) {
 		m_scorePickups[scorePickup.first].render(window);
+		if (scorePickup.first.first == 1 && scorePickup.first.second == 1) {
+			sf::Vector2f pos(m_scorePickups[scorePickup.first].getPosition());
+		}
 	}
 
 }

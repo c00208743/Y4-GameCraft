@@ -1,9 +1,10 @@
 #include "Player.h"
 
 Player::Player(Grid &Grid):
-	m_Grid(&Grid)
+	m_Grid(&Grid),
+	m_pool(40)
 {
-
+	m_pool.init();
 	m_pos = sf::Vector2f(75, 125);
 
 	velocity = sf::Vector2f(0, 0);
@@ -22,6 +23,7 @@ Player::Player(Grid &Grid):
 
 Player::~Player()
 {
+	m_pool.shutdown();
 }
 
 void Player::update()
@@ -37,19 +39,23 @@ void Player::update()
 
 void Player::setDirection()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_currentDir ==IDLE)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_currentDir ==IDLE
+		&& m_Grid->m_tileGrid[pGridY - 1][pGridX]->getCurrentState() != WALL)
 	{
 		m_currentDir = UP;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_currentDir == IDLE)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_currentDir == IDLE
+		&& m_Grid->m_tileGrid[pGridY +1 ][pGridX]->getCurrentState() != WALL)
 	{
 		m_currentDir = DOWN;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_currentDir == IDLE)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_currentDir == IDLE
+		&& m_Grid->m_tileGrid[pGridY][pGridX -1 ]->getCurrentState() != WALL)
 	{
 		m_currentDir = LEFT;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && m_currentDir == IDLE)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && m_currentDir == IDLE
+		&& m_Grid->m_tileGrid[pGridY][pGridX +1]->getCurrentState() != WALL)
 	{
 		m_currentDir = RIGHT;
 	}
@@ -92,6 +98,31 @@ void Player::move()
 	}
 }
 
+void lerpScore(ScorePickup * pickup)
+{
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+	sf::Time timePerFrame = sf::seconds(1.f / 60.f); // 60 fps
+	bool done = false;
+	pickup->collison();
+	while (!done)
+	{
+		timeSinceLastUpdate += clock.restart();
+		while (timeSinceLastUpdate > timePerFrame)
+		{
+			timeSinceLastUpdate -= timePerFrame;
+			if (pickup->getActive()) {
+				pickup->update(timePerFrame.asSeconds()); // 60 fps
+			}
+			else {
+				done = true;
+				break;
+			}
+		}
+	}
+	std::cout << "Thread finished" << std::endl;
+}
+
 void Player::collision()
 {
 	if (m_currentDir == RIGHT && m_Grid->m_tileGrid[pGridY][pGridX + 1]->getCurrentState() == WALL)
@@ -130,7 +161,8 @@ void Player::collision()
 	}
 	if (m_Grid->m_tileGrid[pGridY][pGridX]->getCurrentState() == GOAL && m_Grid->goalReached == false)
 	{
-		
+		m_pool.shutdown();
+		m_pool.init();
 		m_Grid->goalReached = true;
 		m_Grid->loadNextLevel();
 		m_pos = sf::Vector2f(75, 125);
@@ -140,8 +172,8 @@ void Player::collision()
 	if (m_Grid->m_tileGrid[pGridY][pGridX]->getCurrentState() == NONE) {
 		std::pair<int, int> pPos(pGridY, pGridX);
 		if (m_Grid->m_scorePickups[pPos].getActive() && !m_Grid->m_scorePickups[pPos].m_hit) {
-			m_Grid->m_scorePickups[pPos].collison();
 			m_score++;
+			m_pool.submit(lerpScore, &m_Grid->m_scorePickups[pPos]);
 		}
 	}
 }

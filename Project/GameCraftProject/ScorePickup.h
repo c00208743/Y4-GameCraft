@@ -20,6 +20,7 @@ public:
 	{
 		return (1.0f - interpolate) * start + (interpolate * end);
 	}
+	sf::Vector2f getPosition();
 	bool m_hit;
 private:
 	sf::Sprite m_sprite;

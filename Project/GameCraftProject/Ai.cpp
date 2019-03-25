@@ -44,19 +44,15 @@ void Ai::setDirection()
 	}
 	if (r == 1) {
 		m_currentDir = d_LEFT;
-		std::cout << "L" << std::endl;
 	}
 	if (r == 2) {
 		m_currentDir = d_RIGHT;
-		std::cout << "R" << std::endl;
 	}
 	if (r == 3) {
 		m_currentDir = d_UP;
-		std::cout << "U" << std::endl;
 	}
 	if (r == 4) {
 		m_currentDir = d_DOWN;
-		std::cout << "D" << std::endl;
 	}
 
 	// should change direction on collison -- set timer to 0

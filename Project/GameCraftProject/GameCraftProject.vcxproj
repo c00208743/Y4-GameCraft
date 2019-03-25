@@ -138,7 +138,10 @@
     <ClInclude Include="Ai.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="SafeQueue.h" />
     <ClInclude Include="ScorePickup.h" />
+    <ClInclude Include="semaphore.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Hud.h" />

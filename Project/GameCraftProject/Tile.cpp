@@ -7,13 +7,10 @@ Tile::Tile(float x, float y, int tileSize, float tileScale, int xPos, int yPos, 
 	m_xPos(xPos),
 	m_yPos(yPos)
 {
-
 	rectangle.setSize(sf::Vector2f(m_tileSize * m_tileScale, m_tileSize * m_tileScale));
 	rectangle.setOutlineThickness(2);
 	rectangle.setOutlineColor(sf::Color(200, 200, 200));
 	rectangle.setPosition(x, y);
-
-
 }
 
 Tile::~Tile()
@@ -35,10 +32,8 @@ void Tile::setCurrentState(State s)
 	switch (m_currentState)
 	{
 	case NONE:
-
 		rectangle.setFillColor(sf::Color(255, 255, 255));
 		break;
-	
 	case GOAL:
 		rectangle.setFillColor(sf::Color::Red);
 		break;
@@ -70,7 +65,5 @@ State Tile::getCurrentState()
 /// <param name="window"></param>
 void Tile::render(sf::RenderWindow &window)
 {
-	
 	window.draw(rectangle);
-
 }

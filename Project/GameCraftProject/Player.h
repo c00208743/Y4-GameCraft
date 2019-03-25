@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Grid.h"
+#include <SFML/System.hpp>
+#include "ThreadPool.h"
 
 enum Dir {
 	UP,
@@ -33,4 +35,7 @@ private:
 	int pGridX, pGridY;
 
 	Grid *m_Grid;
+	
+	std::vector<sf::Thread*> m_scoreThreads;
+	ThreadPool m_pool;
 };

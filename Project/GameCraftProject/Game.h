@@ -8,6 +8,7 @@
 
 // Class Files
 #include "Hud.h"
+#include "ThreadPool.h"
 
 class Game
 {
