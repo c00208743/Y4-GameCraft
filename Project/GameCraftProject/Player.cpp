@@ -2,7 +2,7 @@
 
 Player::Player(Grid &Grid):
 	m_Grid(&Grid),
-	m_pool(40)
+	m_pool(50)
 {
 	m_pool.init();
 	m_pos = sf::Vector2f(75, 125);
@@ -98,7 +98,7 @@ void Player::move()
 	}
 }
 
-void lerpScore(ScorePickup * pickup)
+void Player::lerpScore(ScorePickup * pickup)
 {
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -173,7 +173,7 @@ void Player::collision()
 		std::pair<int, int> pPos(pGridY, pGridX);
 		if (m_Grid->m_scorePickups[pPos].getActive() && !m_Grid->m_scorePickups[pPos].m_hit) {
 			m_score++;
-			m_pool.submit(lerpScore, &m_Grid->m_scorePickups[pPos]);
+			m_pool.submit(&Player::lerpScore, &m_Grid->m_scorePickups[pPos]);
 		}
 	}
 }

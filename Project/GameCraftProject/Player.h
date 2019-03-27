@@ -26,6 +26,8 @@ public:
 	void render(sf::RenderWindow &window);
 	sf::Vector2f getPos();
 	int m_score = 0;
+
+	static void lerpScore(ScorePickup * pickup);
 private:
 	sf::Vector2f m_pos;
 	sf::Vector2f velocity;

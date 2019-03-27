@@ -9,10 +9,11 @@
 
 class ThreadPool {
 public:
-	ThreadPool(const int numThreads) : m_workers(std::vector<std::thread>(numThreads)), m_stop(false) {
-		
-	};
+	ThreadPool(const int numThreads) : m_workers(std::vector<std::thread>(numThreads)), m_stop(false) {};
 
+	/// <summary>
+	/// Thread worker class that operates on tasks in the threadpool when available
+	/// </summary>
 	class ThreadWorker {
 	private:
 		int m_id;
@@ -24,18 +25,17 @@ public:
 
 		void operator()() {
 			std::function<void()> func;
-			bool dequeued = false;
+			bool removed = false;
 			while (!m_pool->m_stop) {
 				{
 					std::unique_lock<std::mutex> lock(m_pool->m_mtx);
 					if (m_pool->m_tasks.empty()) {
 						m_pool->m_cv.wait(lock);
 					}
-					dequeued = m_pool->m_tasks.pop(func);
+					removed = m_pool->m_tasks.pop(func);
 				}
-				if (dequeued) {
+				if (removed)
 					func();
-				}
 			}
 		}
 	};
